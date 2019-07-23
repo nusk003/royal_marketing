@@ -69,7 +69,6 @@ class SearchResults extends Component{
 
 		return(
         <div>    
-		<div className="offcanvas-wrapper">
         <PageHeader name="Serach Results" bread="Results"/>
        
 
@@ -84,13 +83,7 @@ class SearchResults extends Component{
 
         
         
-        <Footer/>
-        </div>
-        <a className="scroll-to-top-btn" href="#">
-        <i className="icon-arrow-up"></i>
-        </a>
-         <div className="site-backdrop"></div>
-
+        
         </div>
 		);
 	}

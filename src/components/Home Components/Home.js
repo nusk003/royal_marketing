@@ -35,7 +35,6 @@ class HomeContent extends Component{
 
 		return(
         <div>    
-		<div className="offcanvas-wrapper">
         {!this.props.getHeroSlider.loading ?
             <HomeSlider slides = {this.props.getHeroSlider.slides} />
         :
@@ -47,13 +46,8 @@ class HomeContent extends Component{
         <TopCat {...this.props}/>
         <FeaturedProducts {...this.props} />
         <PopularBrands {...this.props} />
-        <Services/>
-        <Footer/>
-        </div>
-        <a className="scroll-to-top-btn" href="#">
-        <i className="icon-arrow-up"></i>
-        </a>
-         <div className="site-backdrop"></div>
+        {/* <Services/> */}
+        
 
         </div>
 		);

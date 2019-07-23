@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 import * as actions from './index'
+import { home } from './keys';
 
 export const deleteCartStart = () =>{
 
@@ -29,7 +30,7 @@ export const deleteCart = (token = null,cartProId) => {
 
         if (token != null){
 
-            axios.put('http://localhost:8000/api/cart/deletecart/?vendorId=1',{cartProductId:cartProId},{headers:{ Authorization : "Token "+token}})
+            axios.put(`${home}/api/cart/deletecart/?vendorId=1`,{cartProductId:cartProId},{headers:{ Authorization : "Token "+token}})
             .then(res=>{
                 if(res.data.success){
                     dispatch(actions.getCartSuccess(res.data.cart))

@@ -6,7 +6,7 @@ const TopCategory = (props) => {
     return(
         <div className="col-md-4 col-sm-6 home-cat">
                 <div className="card">
-                    <Link className="card-img-tiles" to="/tc">
+                    <Link className="card-img-tiles" to={`/${props.title}/cid/${props.id}`}>
                         <div className="inner">
                             <div className="main-img">
                             {props.Image.slice(0,1).map((img)=>

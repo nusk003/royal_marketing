@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import { home, apiKey } from './keys';
 
 export const getHeroSliderStart = () =>{
 
@@ -31,7 +32,7 @@ export const getHeroSlider = () => {
 
         
 
-            axios.get('http://localhost:8000/api/utills/getheroslider/')
+            axios.get(`${home}/api/utills/getheroslider/`,{headers:{Authorization : apiKey}})
             .then(res=>{
                 
                 dispatch(getHeroSliderSuccess(res.data))

@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import { home } from './keys';
 
 export const createAddressStart = () =>{
 
@@ -28,7 +29,7 @@ export const createAddress = (token,address) => {
 
         if (token != null){
 
-            axios.post('http://localhost:8000/api/user/createaddress/',{address:address},{headers:{Authorization:"Token "+token}})
+            axios.post(`${home}/api/user/createaddress/`,{address:address},{headers:{Authorization:"Token "+token}})
             .then(res=>{
                 if(res.data.success){
                     dispatch(createAddressSuccess())

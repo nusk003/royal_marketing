@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 import * as actions from './index'
+import { home } from './keys';
 
 export const updateCartStart = () =>{
 
@@ -29,7 +30,7 @@ export const updateCart = (token = null,cartProId,qty) => {
 
         if (token != null){
 
-            axios.put('http://localhost:8000/api/cart/updatecart/?vendorId=1',{cartProductId:cartProId,qty:qty},{headers:{Authorization:"Token "+token}})
+            axios.put(`${home}/api/cart/updatecart/?vendorId=1`,{cartProductId:cartProId,qty:qty},{headers:{Authorization:"Token "+token}})
             .then(res=>{
                 if(res.data.success){
                     dispatch(actions.getCartSuccess(res.data.cart))

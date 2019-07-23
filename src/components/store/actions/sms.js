@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 import * as authActions from './auth'
+import { home, apiKey } from './keys';
 
 
 export const showSMS = () => {
@@ -44,7 +45,7 @@ export const smsSend = phone => {
 
     return dispatch => {
         dispatch(smsStart());
-        axios.post('http://localhost:8000/api/verification/send/',{phone:phone})
+        axios.post(`${home}/api/verification/send/`,{phone:phone},{headers:{Authorization : apiKey}})
         .then(response=>{
             if(response.data.success){
                 dispatch(smsSuccess(response.data.data.pk,response.data.data.phone))

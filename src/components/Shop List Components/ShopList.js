@@ -21,16 +21,9 @@ class HomeContent extends Component{
 
 		return(
         <div>    
-        <Header/>    
-		<div className="offcanvas-wrapper">
+      
         <PageHeader name="Shop" bread="Shop"/>
-        <ShopContent/>
-        <Footer/>
-        </div>
-        <a className="scroll-to-top-btn" href="#">
-        <i className="icon-arrow-up"></i>
-        </a>
-         <div className="site-backdrop"></div>
+        <ShopContent/>       
 
         </div>
 		);

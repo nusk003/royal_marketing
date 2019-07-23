@@ -4,6 +4,7 @@ import axios from 'axios'
 import {withRouter} from 'react-router-dom'
 
 import './autoSuggest.css'
+import { apiKey, home } from '../store/actions/keys';
 
 // Imagine you have a list of languages that you'd like to autosuggest.
 const languages = [
@@ -80,7 +81,7 @@ const languages = [
 
    getSuggestions = value => {
 
-      axios.get('http://localhost:8000/api/product/suggestions/?vendorId=1&page=1&page_size=6&search='+value)
+      axios.get(`${home}/api/product/suggestions/?vendorId=1&page=1&page_size=6&search=${value}`,{headers:{Authorization:apiKey}})
       .then((res)=>{
           this.setState({
             suggestions : res.data.results

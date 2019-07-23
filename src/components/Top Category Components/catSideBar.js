@@ -39,13 +39,13 @@ class CatSidebar extends Component{
                         </ul>
                     </section>
                     
-                    <section className="promo-box shop-promo">
+                    {/* <section className="promo-box shop-promo">
                         <div className="promo-box-content text-center padding-top-3x padding-bottom-2x">
                             <h4 className="text-light text-thin text-shadow">New Collection of</h4>
                             <h3 className="text-bold text-light text-shadow">Smatphones</h3>
                             <a className="btn btn-sm btn-primary" href="shop-grid-1.html">Shop Now</a>
                         </div>
-                    </section>
+                    </section> */}
                 </aside>
         </div>
 

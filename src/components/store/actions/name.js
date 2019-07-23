@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 import authSuccess from './auth'
+import { home } from './keys';
 
 export const showName = () => {
     return{
@@ -43,7 +44,7 @@ export const updateName = (name,token) => {
 
     return dispatch => {
         dispatch(nameStart())
-        axios.put('http://localhost:8000/api/user/updatename',{name:name},{headers:{Authorization:"Token "+token}})
+        axios.put(`${home}/api/user/updatename`,{name:name},{headers:{Authorization:"Token "+token}})
         .then(response=>{
 
             if(response.data.success){

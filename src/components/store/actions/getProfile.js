@@ -1,5 +1,6 @@
 import * as actionTypes  from './actionTypes'
 import axios from 'axios'
+import { home } from './keys';
 
 export const getProfileStart = () => {
     return {
@@ -25,7 +26,7 @@ export const getProfileFail = err => {
 export const getProfile = token => {
     return dispatch => {
         dispatch (getProfileStart())
-        axios.get('http://localhost:8000/api/user/profile/',{headers:{Authorization:"Token "+token}})
+        axios.get(`${home}/api/user/profile/`,{headers:{Authorization:"Token "+token}})
         .then(res=>{
             dispatch(getProfileSuccess(res.data))
         })

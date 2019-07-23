@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class Footer extends Component{
 
 	render(){
+        const {settings} = this.props
 
 		return(
 		    <footer className="site-footer">
@@ -10,30 +11,25 @@ class Footer extends Component{
             <div className="row">
                 <div className="col-lg-3 col-md-6">
                     <section className="widget widget-light-skin">
-                        <h3 className="widget-title">Inspina Contact Info</h3>
-                        <p className="text-white"><i className="fa fa-phone"></i> +1 888 888 8888</p>
-                        <p className="text-white"><i className="fa fa-envelope-o"></i> info@yoursite.com</p>
-                        <p className="text-white"><i className="fa fa-map-marker"></i> 221B Baker Street, London, UK</p>
-                        <ul className="list-unstyled text-sm text-white">
-                            <li><span className="opacity-50">Mon - Fri: </span>09:00 - 18:00</li>
-                            <li><span className="opacity-50">Sat - Sun: </span>10.00 - 15:00</li>
-                        </ul>
-                        <a className="social-button shape-circle sb-facebook sb-light-skin" href="#">
+                        <h3 className="widget-title">Royal Marketing</h3>
+                        <p className="text-white"><i className="fa fa-phone"></i>{settings.phone}</p>
+                        <p className="text-white"><i className="fa fa-envelope-o"></i>{settings.email}</p>
+                        <p className="text-white"><i className="fa fa-map-marker"></i>{settings.address}</p>
+                        
+                        <a className="social-button shape-circle sb-facebook sb-light-skin" href={settings.facebook_url}>
                             <i className="socicon-facebook"></i>
                         </a>
-                        <a className="social-button shape-circle sb-twitter sb-light-skin" href="#">
+                        <a className="social-button shape-circle sb-twitter sb-light-skin" href={settings.twitter_url}>
                             <i className="socicon-twitter"></i>
                         </a>
-                        <a className="social-button shape-circle sb-instagram sb-light-skin" href="#">
+                        <a className="social-button shape-circle sb-instagram sb-light-skin" href={settings.instagram_url}>
                             <i className="socicon-googleplus"></i>
                         </a>
-                        <a className="social-button shape-circle sb-instagram sb-light-skin" href="#">
-                            <i className="socicon-instagram"></i>
-                        </a>
+                       
                     </section>
                 </div>
                 
-                <div className="col-lg-3 col-md-6">
+                {/* <div className="col-lg-3 col-md-6">
                     <section className="widget widget-links widget-light-skin">
                         <h3 className="widget-title">Our Services</h3>
                         <ul>
@@ -46,9 +42,9 @@ class Footer extends Component{
                             <li><a href="#">Tested on Multiple Devices</a></li>
                         </ul>
                     </section>
-                </div>
+                </div> */}
            
-                <div className="col-lg-3 col-md-6">
+                {/* <div className="col-lg-3 col-md-6">
                     <section className="widget widget-links widget-light-skin">
                         <h3 className="widget-title">About Us</h3>
                         <ul>
@@ -61,9 +57,9 @@ class Footer extends Component{
                             <li><a href="#">Privacy Policy</a></li>
                         </ul>
                     </section>
-                </div>
+                </div> */}
                
-                <div className="col-lg-3 col-md-6">
+                {/* <div className="col-lg-3 col-md-6">
                     <section className="widget widget-links widget-light-skin">
                         <h3 className="widget-title">Account Info</h3>
                         <ul>
@@ -76,10 +72,10 @@ class Footer extends Component{
                             <li><a href="#">Single Tickets</a></li>
                         </ul>
                     </section>
-                </div>
+                </div> */}
             </div>
             <hr className="hr-light" />
-            <p className="footer-copyright text-center">© 2018 Inspina | All rights reserved</p>
+            <p className="footer-copyright text-center">© {new Date().getFullYear()} Royal Marketing | All rights reserved</p>
         </div>
     </footer>
 			);

@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import { home, apiKey } from './keys';
 
 export const getCategoriesStart = () =>{
 
@@ -31,7 +32,7 @@ export const getCategories = () => {
 
         
 
-            axios.get('http://localhost:8000/api/categories/getcategories/')
+            axios.get(`${home}/api/categories/getcategories/`,{headers:{Authorization : apiKey}})
             .then(res=>{
                 
                 dispatch(getCategoriesSuccess(res.data))

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import * as actionTypes from './actionTypes'
+import { home, apiKey } from './keys';
 
 
 export const productCategoryStart = () => {
@@ -31,7 +32,7 @@ export const productForCategory =  (page,size,cat) => {
 
     return dispatch => {
         dispatch(productCategoryStart())
-        axios.get('http://localhost:8000/api/product/getproducts/?'+cat+'&page_size='+size+'&page='+page+'&vendorId=1')
+        axios.get(`${home}/api/product/getproducts/?${cat}&page_size=${size}&page=${page}&vendorId=1`,{headers:{Authorization:apiKey}})
         .then(res=>{
             dispatch(productCategorySuccess(res.data))
         })

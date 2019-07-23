@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import { home, apiKey } from './keys';
 
 export const fetchTopCatsStart = () => {
     return{
@@ -28,7 +29,7 @@ export const fetchTopCats =  () => {
 
     return dispatch => {
         dispatch(fetchTopCatsStart())
-        axios.get('http://localhost:8000/api/categories/topcategories/')
+        axios.get(`${home}/api/categories/topcategories/`,{headers:{Authorization : apiKey}})
         .then(res=>{
             dispatch(fetchTopCatsSuccess(res.data))
         })

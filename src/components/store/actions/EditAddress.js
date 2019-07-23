@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import { home } from './keys';
 
 export const editAddressStart = () =>{
 
@@ -28,7 +29,7 @@ export const editAddress = (token,id,address) => {
 
         if (token != null){
 
-            axios.put('http://localhost:8000/api/user/updateaddress/',{id:id,address:address},{headers:{Authorization:"Token "+token}})
+            axios.put(`${home}/api/user/updateaddress/`,{id:id,address:address},{headers:{Authorization:"Token "+token}})
             .then(res=>{
                 if(res.data.success){
                     dispatch(editAddressSuccess())

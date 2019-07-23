@@ -242,6 +242,7 @@ class ProductContent extends Component{
 
     render(){
         let stars = []
+        const {settings} = this.props
         if(!this.state.loading){
             let totalStars = 0
             for(let review of this.props.getProDetails.details.reviews){
@@ -267,7 +268,9 @@ class ProductContent extends Component{
                         
                         
                             <ProImageSlider
-                            Images = {this.state.Images}
+
+                                Images = {this.state.Images}
+                                
                             />
                         </div>
                     </div>
@@ -346,30 +349,10 @@ class ProductContent extends Component{
                         <div className="d-flex flex-wrap justify-content-between mb-30 pull-right" >
                             
                             <div className="sp-buttons mt-2 mb-2">
-                                {this.state.isStock ?
-                                this.state.isInCart ?
-                                <Link to ="/cart">
-                                <button className="btn btn-primary" ><i className="icon-bag"></i> View Cart
-                                </button>
-                                </Link>
-                                :
-                                
-                                <button className="btn btn-primary" data-toast="" onClick = {this.onAddToCart} data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i className="icon-bag"></i> 
-                                {this.state.addToCartLoading ?
-                                <BeatLoader
-                                color = 'white'
-                                size = {15}
-
-                                /> 
-                                :
-                                "Add to Cart"
-                                
-                                }
-                                </button>
-                            :
-                            <button className="btn btn-primary" data-toast="" data-toast-type="danger" data-toast-position="topRight" style={{backgroundColor:'red'}} data-toast-icon="icon-circle-check" data-toast-title="Sorry!! Product" data-toast-message="is Out of Stock"><i className="icon-bag"></i> Out Of Stock</button>
-
-                            }
+                            <a href = {`callto:${settings.phone}`}>  
+                            <button className="btn btn-primary" data-toast="" data-toast-type="danger" data-toast-position="topRight" style={{backgroundColor:'red'}} data-toast-icon="icon-circle-check" data-toast-title="Sorry!! Product" data-toast-message="is Out of Stock"><i className="fa fa-phone"></i> Call us </button>
+                            </a>
+                            
                             </div>
                         </div>
                     </div>

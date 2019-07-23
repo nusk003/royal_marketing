@@ -19,8 +19,17 @@ import Checkout from './components/Checkout Components/Checkout';
 import SearchResults from './components/SearchResultsComponents/SeachResults';
 import Header from './components/Header Components/header'
 import AboutUs from './components/AboutUs components/AboutUs';
+import ContactUs from './components/ContactComponents/ContactUs';
+import Axios from 'axios';
+import Footer from './components/Footer components/footer';
+import { home, apiKey } from './components/store/actions/keys';
 
 class App extends Component{
+	state = {
+		aboutUs : [],
+		settings : {},
+		active : '/home'
+	}
 	setCart = () => {
 		if(localStorage.getItem('cart') == undefined ){
 
@@ -51,7 +60,10 @@ class App extends Component{
 		}
 	}
 	componentWillMount(){
+		this.props.onGetCategories()
 
+		this.getAboutUs()
+		this.getSettings()
 		this.props.onTryAutoSignUp()
 		this.setCart()
 		this.setCheckout()
@@ -59,6 +71,20 @@ class App extends Component{
 		this.getCart()
 		this.props.onGetCategories()
 
+	}
+
+	getAboutUs = () => {
+		Axios.get(`${home}/api/utills/about-us/`,{headers:{Authorization : apiKey}})
+		.then(({data})=>{
+			this.setState({aboutUs:data})
+		})
+	}
+
+	getSettings = () => {
+		Axios.get(`${home}/api/utills/app-settings/`,{headers:{Authorization:apiKey}})
+		.then(({data})=>{
+			this.setState({settings:data})
+		})
 	}
 
 	getCart = async () => {
@@ -93,49 +119,36 @@ class App extends Component{
 			
 			<Router>
 				<div>
-				<Header {...this.props}/>
+				<Header {...this.props} settings = {this.state.settings} 
+					active = {this.state.active}
+					activeChange = {(value)=>this.setState({active:value})}
+				/>
+				<div>    
+				<div className="offcanvas-wrapper">
 				<ScrollTop>
 					<Switch>
 						<Route exact path="/" component={HomeContent } />
 						<Route path="/home" component={HomeContent } />
-						<Route path="/cart" component={Cart } />
-						<Route path="/tc" component={TopCategories} />
 						<Route  path="/:title/cid/:cid" component={ShopContentGrid} />
 						<Route path="/:title/bid/:bid" component={ShopContentGrid} />
 						<Route path="/:title/pcid/:pcid" component={ShopContentGrid} />
-						<Route path="/aboutus" component={AboutUs} />
+						<Route path="/aboutus" component={()=><AboutUs aboutUs = {this.state.aboutUs} />} />
 
-						<Route path="/:title/prid/:id" component={ProductDetails} />
-						<Route path="/account/" component={MyAccount} />
+						<Route path="/:title/prid/:id" component={()=><ProductDetails settings = {this.state.settings} />} />
 						<Route path="/results/" component={SearchResults}/>
-	
-						<Route path="/login" component={Login} />
-						{ !this.props.IsAuthenticated && !this.props.loading?
-						<div>
-							<Route path="/checkout/" component={Login} />
-							
-							<Route path="/trackorder" component={Login} />
-
-							<Route component={PageNotFound}/>
-
-
-						</div>
-						:
-						<div>
-							<Route path="/checkout/" component={Checkout} />
-							
-							<Route path="/trackorder" component={OrderTrack} />
-
-							<Route component={PageNotFound}/>
-
-						</div>
-						
-						}
-						
+						<Route path="/contact/" component={()=><ContactUs settings = {this.state.settings}/>}/>	
 						<Route component={PageNotFound}/>
 					</Switch>
 				</ScrollTop>
-						</div>
+				<Footer settings = {this.state.settings}  />
+        		</div>
+        		<a className="scroll-to-top-btn" href="#">
+        		<i className="icon-arrow-up"></i>
+        		</a>
+         		<div className="site-backdrop"></div>
+
+        		</div>
+				</div>
 			</Router>
 			
 			);

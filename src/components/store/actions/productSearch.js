@@ -1,5 +1,6 @@
 import axios from 'axios'
 import * as actionTypes from './actionTypes'
+import { home, apiKey } from './keys';
 
 
 export const productSearchStart = () => {
@@ -28,10 +29,9 @@ export const productSearchFail = error => {
 }
 
 export const productSearch =  (page,size,search) => {
-
     return dispatch => {
         dispatch(productSearchStart())
-        axios.get('http://localhost:8000/api/product/suggestions/?search='+search+'&page_size='+size+'&page='+page+'&vendorId=1')
+        axios.get(`${home}/api/product/suggestions/?search=${search}&page_size=${size}&page=${page}&vendorId=1`,{headers:{Authorization:apiKey}})
         .then(res=>{
             dispatch(productSearchSuccess(res.data))
         })

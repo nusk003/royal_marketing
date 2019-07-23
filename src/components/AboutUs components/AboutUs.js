@@ -1,27 +1,42 @@
 import React from 'react'
 import PageHeader from '../PageHeader';
 import Footer from '../Footer components/footer';
+import loadScript from '../loadScripts';
 
 class AboutUs extends React.Component{
+    componentWillMount() 
+        {
+        const load = new loadScript()
+        load.linkScripts()
 
+        document.title = "About Us"
+    }
     render(){
+        const {aboutUs} = this.props
         return(
             <div>
-            <div class="offcanvas-wrapper">
     <PageHeader name="About us" bread = "About us" />
    
     <div class="container">
-        <div class="row align-items-center padding-bottom-3x">
+        {
+            aboutUs.map((about,i)=>
+            <div>
+            <div class="row align-items-center padding-bottom-3x">
             <div class="col-md-5">
-                <img class="d-block w-270 m-auto" src="assets/images/features/01.jpg" alt="Online Shopping"/>
+                <img class="d-block w-270 m-auto" src={about.image} alt="Online Shopping"/>
             </div>
             <div class="col-md-7 text-md-left text-center">
                 <div class="hidden-md-up"></div>
-                <h2>Online Secure Payment</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters ...</p>
+                <h2>{about.title}</h2>
+                <p>{about.description}</p>
             </div>
         </div>
         <hr/>
+        </div>
+            )
+        }
+        
+        {/* <hr/>
         <div class="row align-items-center padding-top-3x padding-bottom-3x">
             <div class="col-md-5 order-md-2">
                 <img class="d-block w-270 m-auto" src="assets/images/features/02.jpg" alt="Delivery"/>
@@ -32,9 +47,9 @@ class AboutUs extends React.Component{
                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters ...</p>
             </div>
         </div>
-        <hr/>
+        <hr/> */}
         
-        <div class="row padding-top-3x padding-bottom-3x">
+        {/* <div class="row padding-top-3x padding-bottom-3x">
             <div class="col-md-3 col-sm-6 text-center home-cat"><img class="d-block w-150 mx-auto img-thumbnail rounded-circle mb-2" src="assets/images/team/01.jpg" alt="Team"/>
                 <h6>Julia Roberts</h6>
                 <p class="text-muted mb-2">Founder, CEO</p>
@@ -71,10 +86,8 @@ class AboutUs extends React.Component{
                     <a class="social-button shape-circle sb-google-plus" href="#" data-toggle="tooltip" data-placement="top" title="Google +"><i class="socicon-googleplus"></i></a>
                 </div>
             </div>
-        </div>
+        </div> */}
     </div>
-    <Footer/>
-</div>
 </div>
         )
     }

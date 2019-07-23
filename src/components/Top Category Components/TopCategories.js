@@ -16,16 +16,11 @@ componentWillMount(){
     render(){
         return(
         <div>
-            <Header />
-            <div className="offcanvas-wrapper">
+          
 			    <PageHeader name="Top Categories" bread="Top Categories" ></PageHeader>
                 <MainTopCats />
                 <Footer />
-            </div>
-        <a className="scroll-to-top-btn" href="#">
-        <i className="icon-arrow-up"></i>
-        </a>
-        <div className="site-backdrop"></div>
+        
 
         </div>
 

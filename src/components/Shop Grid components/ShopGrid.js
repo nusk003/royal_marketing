@@ -134,7 +134,6 @@ class HomeContent extends Component{
 
 		return(
         <div>    
-		<div className="offcanvas-wrapper">
         <PageHeader name={this.props.match.params.title} bread="Shop"/>
         
         <SearchContent
@@ -146,16 +145,7 @@ class HomeContent extends Component{
             pageSize = {this.state.pageSize}
             getCategories = {this.props.getCategories}
         />
-        
-        
-        
-        <Footer/>
-        </div>
-        <a className="scroll-to-top-btn" href="#">
-        <i className="icon-arrow-up"></i>
-        </a>
-         <div className="site-backdrop"></div>
-
+    
         </div>
 		);
 	}

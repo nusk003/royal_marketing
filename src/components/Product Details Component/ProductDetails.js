@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link,withRouter } from 'react-router-dom';
 import PageHeader from '../PageHeader';
 import Header from '../Header Components/header';
 import Footer from '../Footer components/footer';
@@ -10,29 +10,27 @@ import * as actions from '../store/actions/index'
 
 class ProductDetails extends Component{
 	
-        componentWillMount() {
+    componentWillMount() {
 		
-		this.props.onGetProDetails(this.props.match.params.id)
-		this.props.onGetPopularBrands()
+			this.props.onGetProDetails(this.props.match.params.id)
+			this.props.onGetPopularBrands()
 		
-        const ls = new loadScript();
-        ls.linkScripts();
+      const ls = new loadScript();
+      ls.linkScripts();
 		
-		document.title = "ProductDetails";
+			document.title = "ProductDetails";
 		
 	  }
 	  
 	  componentDidMount(){
-		
-		
+			
+				setTimeout(()=>{
 
-		setTimeout(()=>{
+					if(this.props.getProDetails.error != null || this.props.getProDetails.details == null){
+						this.props.history.push('/home')
+					}
 
-			if(this.props.getProDetails.error != null || this.props.getProDetails.details == null){
-				this.props.history.push('/home')
-			}
-
-		},200)
+				},200)
 		
 		
 	  }
@@ -49,19 +47,10 @@ class ProductDetails extends Component{
 
 
 	render(){
-		
 		return(
 			<div>
-			<div className="offcanvas-wrapper">
 			<PageHeader name="Product Details" bread="Product Details" ></PageHeader>
 			<ProductContent {...this.props}/>
-        	<Footer/>
-        	</div>
-        	<a className="scroll-to-top-btn" href="#">
-        	<i className="icon-arrow-up"></i>
-        	</a>
-         	<div className="site-backdrop"></div>
-
 			</div>
 
 
@@ -87,4 +76,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProductDetails);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(ProductDetails));

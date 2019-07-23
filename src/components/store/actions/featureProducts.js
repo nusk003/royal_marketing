@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import { apiKey, home } from './keys';
 
 export const fetchFeaProStart = () => {
     return{
@@ -28,7 +29,7 @@ export const fetchFeaPro =  vendor => {
 
     return dispatch => {
         dispatch(fetchFeaProStart())
-        axios.get('http://localhost:8000/api/products/featureproducts/?vendorId='+vendor)
+        axios.get(`${home}/api/products/featureproducts/?vendorId=${vendor}`,{headers:{Authorization:apiKey}})
         .then(res=>{
             dispatch(fetchFeaProSuccess(res.data))
         })

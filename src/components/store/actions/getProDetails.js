@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import { home, apiKey } from './keys';
 
 export const getProDetailsStart = () =>{
 
@@ -30,7 +31,7 @@ export const getProDetails = id => {
     return dispatch => {
         dispatch(getProDetailsStart())
 
-        axios.get('http://localhost:8000/api/product/details/?pid='+id+'&vendorId=1')
+        axios.get(`${home}/api/product/details/?pid=${id}&vendorId=1`,{headers:{Authorization : apiKey}})
         .then(res=>{
             if(res.data.length == 0){
                 dispatch(getProDetailsFail("error"))

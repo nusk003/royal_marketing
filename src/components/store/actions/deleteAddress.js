@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import { home } from './keys';
 
 export const deleteAddressStart = () =>{
 
@@ -28,7 +29,7 @@ export const deleteAddress = (token,id) => {
 
         if (token != null){
 
-            axios.put('http://localhost:8000/api/user/deleteaddress/',{id:id},{headers:{Authorization:"Token "+token}})
+            axios.put(`${home}/api/user/deleteaddress/`,{id:id},{headers:{Authorization:"Token "+token}})
             .then(res=>{
                 if(res.data.success){
                     dispatch(deleteAddressSuccess())

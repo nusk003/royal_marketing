@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import { home, apiKey } from './keys';
 
 export const applyPromoCodeStart = () =>{
 
@@ -29,7 +30,7 @@ export const applyPromoCode = (token = null,cartTotal,promoCode) => {
 
         if (token != null){
 
-            axios.post('http://localhost:8000/api/cart/checkpromocode/',{promoCode:promoCode,cartTotal:cartTotal},{headers:{Authorization:"Token "+token}})
+            axios.post(`${home}/api/cart/checkpromocode/`,{promoCode:promoCode,cartTotal:cartTotal},{headers:{Authorization:"Token "+token}})
             .then(res=>{
                 if(res.data.success){
                     dispatch(applyPromoCodeSuccess(res.data))
@@ -53,7 +54,7 @@ export const applyPromoCode = (token = null,cartTotal,promoCode) => {
 
             
 
-            axios.post('http://localhost:8000/api/cart/offlinepromocode/',{promoCode:promoCode,cartTotal:cartTotal})
+            axios.post(`${home}/api/cart/offlinepromocode/`,{promoCode:promoCode,cartTotal:cartTotal},{headers:{Authorization:apiKey}})
             .then(res=>{
                 if(res.data.success){
                     dispatch(applyPromoCodeSuccess(res.data))

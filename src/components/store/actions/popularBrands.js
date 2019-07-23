@@ -1,5 +1,6 @@
 import axios from 'axios'
 import * as actionTypes from './actionTypes'
+import { home, apiKey } from './keys';
 
 
 export const fetchPopBrandStart = () => {
@@ -26,10 +27,9 @@ export const fetchPopBrandFail = error => {
 }
 
 export const fetchPopBrand =  () => {
-
     return dispatch => {
         dispatch(fetchPopBrandStart())
-        axios.get('http://localhost:8000/api/categories/popularbrands/')
+        axios.get(`${home}/api/categories/popularbrands/`,{headers:{Authorization:apiKey}})
         .then(res=>{
             dispatch(fetchPopBrandSuccess(res.data))
         })

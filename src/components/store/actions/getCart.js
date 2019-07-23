@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import { home } from './keys';
 
 export const getCartStart = () =>{
 
@@ -33,7 +34,7 @@ export const getCart = (token = null) => {
 
         if (token != null){
 
-            axios.get('http://localhost:8000/api/cart/getcart/?vendorId=1',{headers:{Authorization:"Token "+token}})
+            axios.get(`${home}/api/cart/getcart/?vendorId=1`,{headers:{Authorization:"Token "+token}})
             .then(res=>{
                 
                 dispatch(getCartSuccess(res.data[0]))

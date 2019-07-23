@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 import * as actions from './index'
+import { home } from './keys';
 
 export const createReviewStart = () =>{
 
@@ -29,7 +30,7 @@ export const createReview = (token,review) => {
 
         if (token != null){
 
-            axios.post('http://localhost:8000/api/product/review/create/',review,{headers:{Authorization:"Token "+token}})
+            axios.post(`${home}/api/product/review/create/`,review,{headers:{Authorization:"Token "+token}})
             .then(res=>{
                 if(res.data.success){
 

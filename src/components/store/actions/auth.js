@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 import * as actions from './index'
+import { home, apiKey } from './keys';
 
 
 export const showAuth = () => {
@@ -57,7 +58,7 @@ export const authLogin = (id,otp) => {
 
     return dispatch => {
         dispatch(authStart())
-        axios.post('http://localhost:8000/api/verification/verify/',{pk:id,otp:otp})
+        axios.post(`${home}/api/verification/verify/`,{pk:id,otp:otp},{headers:{Authorization:apiKey}})
         .then(response=>{
 
             dispatch(actions.mergeCart(response.data.token,JSON.parse(localStorage.getItem('cart')).CartProducts,response.data.isLogin))

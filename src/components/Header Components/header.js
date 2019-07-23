@@ -3,10 +3,11 @@ import logo from '../../assets/images/royal_m.png';
 import Top from './top';
 import MobileMenu from './mobileMenu';
 import ShopCat from './shopCategories';
-import { Link } from 'react-router-dom';
+import { Link,NavLink } from 'react-router-dom';
 import Example from './autoSuggest';
 import { withRouter } from "react-router-dom";
-
+import {connect} from 'react-redux'
+import * as actions from '../store/actions/index'
 
 class Header extends Component{
     
@@ -17,23 +18,25 @@ class Header extends Component{
         this.props.history.push('/')
     }
 
+   
 	render(){
-        const {getProfile} = this.props
+        
+        const {getCategories} = this.props
         const token = localStorage.getItem('token')
-        const {getCart} = this.props
+        const {getCart,settings,active,activeChange} = this.props
+        
 		return(
 		<div>
         
 		<ShopCat {...this.props}/>
 		<MobileMenu {...this.props} />
-		<Top />
+		<Top settings = {settings} />
     	<header className="navbar navbar-sticky">
 		<div className="site-search" method="get">
         <div style={{height:'100%'}}>
         <Example/>
         </div>
         <div className="search-tools">
-            <span className="clear-search">Clear</span>
             <span className="close-search"><i className="icon-cross"></i></span>
         </div>
         </div>
@@ -42,87 +45,58 @@ class Header extends Component{
             <div className="inner">
                 <a className="offcanvas-toggle cats-toggle" href="#shop-categories" data-toggle="offcanvas"></a>
                 <a className="offcanvas-toggle menu-toggle" href="#mobile-menu" data-toggle="offcanvas"></a>
-                <Link className="site-logo" to="/home"><img src={logo} width="50%"/></Link>
+                <Link className="site-logo" to="/home"><img src={settings.logo} width="50%"/></Link>
             </div>
         </div>
     
         <nav className="site-menu">
         <ul>
-            <li className="active">
+            <li className={active == "/home" || active == "/" ? "active" : null} onClick = {()=>activeChange("/home")} >
             	
             	<Link to="/home" > <span>Home</span> </Link>
             	
 			
-                <ul className="sub-menu">
-                    <li className="active"><Link to="/home">Home Version 1</Link></li>
-                    <li><a href="index-2.html">Home Version 2</a></li>
-                    <li><a href="index-3.html">Home Version 3</a></li>
-                </ul>
+                {/*<ul className="sub-menu">
+                                    <li className="active"><Link to="/home">Home Version 1</Link></li>
+                                    <li><a href="index-2.html">Home Version 2</a></li>
+                                    <li><a href="index-3.html">Home Version 3</a></li>
+                                </ul>*/}
             </li>
-            <li>
+            <li className={active == "shop" ? "active" : null}  >
                 <a href="#"><span>Shop</span></a>
                 <ul className="sub-menu">
-                    <li className="has-children">
-                        <a href="#"><span>Shop Categories</span></a>
-                        <ul className="sub-menu">
-                            <li><a href="shop-categories-1.html">Categories Left Sidebar</a></li>
-                            <li><a href="shop-categories-2.html">Categories Right Sidebar</a></li>
-                            <li><a href="shop-categories-3.html">Categories No Sidebar</a></li>
-                        </ul>
+                {getCategories.categories.map((category,i)=>
+                     <li className="has-children" key = {i} >
+                     <Link  onClick = {()=>activeChange("shop")} to = {`/${category.catTitle}/cid/${category.catId}`}><span>{category.catTitle}</span></Link>
+                     <ul className="sub-menu">
+                     {category.proCats.map((proCat,j)=>
+
+                            <li onClick = {()=>activeChange("shop")} key = {j}><Link to = {`/${proCat.proCatTitle}/pcid/${proCat.proCatId}`} >{proCat.proCatTitle}</Link></li>
+
+                        )}
+                         
+                     </ul>
                     </li>
-                    <li className="has-children">
-                        <a href="#"><span>Shop Grid</span></a>
-                        <ul className="sub-menu">
-                            <li><a href="shop-grid-1.html">Shop Grid Left Sidebar</a></li>
-                            <li><a href="shop-grid-2.html">Shop Grid Right Sidebar</a></li>
-                            <li><a href="shop-grid-3.html">Shop Grid No Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li className="has-children">
-                        <a href="#"><span>Shop List</span></a>
-                        <ul className="sub-menu">
-                            <li><a href="shop-list-1.html">Shop List Left Sidebar</a></li>
-                            <li><a href="shop-list-2.html">Shop List Right Sidebar</a></li>
-                            <li><a href="shop-list-3.html">Shop List No Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li className="has-children">
-                        <a href="#"><span>Single Product</span></a>
-                        <ul className="sub-menu">
-                            <li><a href="shop-single-1.html">Single Product Left Sidebar</a></li>
-                            <li><a href="shop-single-2.html">Single Product Right Sidebar</a></li>
-                            <li><a href="shop-single-3.html">Single Product No Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li className="has-children">
-                        <a href="#"><span>Checkout</span></a>
-                        <ul className="sub-menu">
-                            <li><a href="checkout-address.html">Checkout Address</a></li>
-                            <li><a href="checkout-shipping.html">Checkout Shipping</a></li>
-                            <li><a href="checkout-payment.html">Checkout Payment</a></li>
-                            <li><a href="checkout-review.html">Checkout Review</a></li>
-                            <li><a href="checkout-complete.html">Checkout Complete</a></li>
-                        </ul>
-                    </li>
-                    <li><Link to="/cart">Shopping Cart</Link></li>
+                )}
+                   
                 </ul>
             </li>
-            <li>
-                <a href="#"><span>About Us</span></a>
-                <ul className="sub-menu">
-                    <li><a href="account-login.html">Login & Register</a></li>
-                    <li><a href="account-password-recovery.html">Password Recovery</a></li>
-                    <li><a href="account-profile.html">Profile Page</a></li>
-                    <li><a href="account-address.html">Shipping Address</a></li>
-                    <li><a href="account-orders.html">My Orders</a></li>
-                    <li><a href="account-wishlist.html">My Wishlist</a></li>
-                    <li><a href="account-tickets.html">My Tickets</a></li>
-                    <li><a href="account-single-ticket.html">Single Ticket</a></li>
-                </ul>
+            <li className={active == "/aboutus" ? "active" : null} onClick = {()=>activeChange("/aboutus")}>
+                <Link to="/aboutus"><span>About Us</span></Link>
+                {/*<ul className="sub-menu">
+                                    <li><a href="account-login.html">Login & Register</a></li>
+                                    <li><a href="account-password-recovery.html">Password Recovery</a></li>
+                                    <li><a href="account-profile.html">Profile Page</a></li>
+                                    <li><a href="account-address.html">Shipping Address</a></li>
+                                    <li><a href="account-orders.html">My Orders</a></li>
+                                    <li><a href="account-wishlist.html">My Wishlist</a></li>
+                                    <li><a href="account-tickets.html">My Tickets</a></li>
+                                    <li><a href="account-single-ticket.html">Single Ticket</a></li>
+                                </ul>*/}
             </li>
-            <li>
-                <a href="#"><span>Contact Us</span></a>
-                <ul className="sub-menu">
+            <li className={active == "/contact" ? "active" : null} onClick = {()=>activeChange("/contact")}>
+                <Link to="/contact"><span>Contact Us</span></Link>
+                {/* <ul className="sub-menu">
                     <li className="has-children">
                         <a href="#"><span>Blog Layout</span></a>
                         <ul className="sub-menu">
@@ -139,7 +113,7 @@ class Header extends Component{
                             <li><a href="blog-single-3.html">Post No Sidebar</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul> */}
             </li>
          {/*  <li>
                 <a href="#"><span>Pages</span></a>
@@ -290,7 +264,15 @@ class Header extends Component{
 	}
 }
 
+const mapStateToProps = state => {
+    return {
+        getCategories : state.getCategories
+    }
+}
 
+const mapDispatchToProps = dispatch => {
+    return {
+    }
+}
 
-
-export default withRouter(Header);
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Header));

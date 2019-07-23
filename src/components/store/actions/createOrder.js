@@ -1,5 +1,6 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
+import { home } from './keys';
 
 export const createOrderStart = () =>{
 
@@ -29,7 +30,7 @@ export const createOrder = (token,orders) => {
 
         if (token != null){
 
-            axios.post('http://localhost:8000/api/orders/create/?vendorId=1',orders,{headers:{Authorization:"Token "+token}})
+            axios.post(`${home}/api/orders/create/?vendorId=1`,orders,{headers:{Authorization:"Token "+token}})
             .then(res=>{
                 if(res.data.success){
                     dispatch(createOrderSuccess(res.data.message))

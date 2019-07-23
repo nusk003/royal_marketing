@@ -1,6 +1,7 @@
 import * as actionTypes from './actionTypes'
 import axios from 'axios'
 import * as actions from './index'
+import { home } from './keys';
 
 export const mergeCartStart = () =>{
 
@@ -29,7 +30,7 @@ export const mergeCart = (token,cartProducts,isLogin) => {
 
         if (token != null){
 
-            axios.post('http://localhost:8000/api/cart/mergecart/',cartProducts,{headers:{Authorization:"Token "+token}})
+            axios.post(`${home}/api/cart/mergecart/`,cartProducts,{headers:{Authorization:"Token "+token}})
             .then(res=>{
                 if(res.data.success){
                     dispatch(mergeCartSuccess())

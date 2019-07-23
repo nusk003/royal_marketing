@@ -94,7 +94,7 @@ class ProductCard extends Component {
             <img src={this.props.product.Image} alt="Product" />
             </Link>  
             <h3 className="product-title"><Link to={"/"+name+"/prid/"+this.props.product.id}>{this.props.product.productTitle}</Link></h3>
-                {this.props.product.Offer != null  ? 
+                {/* {this.props.product.Offer != null  ? 
                 <div style={{position:'relative'}}>
                     {this.props.product.hasVariants ?<p style={{textAlign:'left',marginBottom:0}}>Starting from</p> : null} 
                     <h4 style={{textAlign:'left',position:'absolute'}} className="product-price" >Rs.{this.props.product.Offer}</h4>
@@ -108,41 +108,17 @@ class ProductCard extends Component {
                     <h4 style={{textAlign:'left',position:'absolute'}}  className="product-price">Rs.{this.props.product.price}</h4>
                 </div>
                 
-                }
+                } */}
             
             <div className="product-buttons">
                 <div className="product-buttons">
-                    {!this.props.product.hasVariants ?
-                        this.props.getCart.cart != null && this.props.getCart.cart.filter(cartItem => cartItem.id == this.props.product.id).length != 0  ? 
-                            
-                            <Link to="/cart"><button className="btn btn-outline-primary btn-sm" >
-                             View Cart
-                             </button>
-                             </Link>
-                            
-                            
-                        :
-                        !this.props.product.isStock ? 
-                            <button className="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="is Out Of Stock!" >
-                             Out Of Stock
-                             </button>
-                            :
-                            <button className="btn btn-outline-primary btn-sm" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-circle-check" data-toast-title="Product" data-toast-message="successfuly added to cart!" onClick={this.onAddToCart.bind(this)}>
-                             {this.state.addToCartLoading ? null : "Add to Cart"}
-                             <BeatLoader
-                             size={15}
-                             loading = {this.state.addToCartLoading}
-                             color = 'white'
-                             />
-                             </button>
                     
-                    : 
                     <Link to={"/"+name+"/prid/"+this.props.product.id}>
                     <button className="btn btn-outline-primary btn-sm" >
                     View Details
                     </button>
                     </Link>
-                    }
+                    
                     
                 </div>
             </div>

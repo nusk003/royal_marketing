@@ -3,14 +3,14 @@ import React,{Component} from 'react';
 class Top extends Component{
 
 	render(){
-
+        const {settings} = this.props
 		return(
 
 			<div className="topbar">
     <div className="topbar-column">
-        <a className="hidden-md-down" href="#"><i className="fa fa-phone"></i>&nbsp;+94777777777</a>
-        <a className="hidden-md-down" href="#"><i className="fa fa-envelope-o"></i>&nbsp;info@royalmarketing.lk</a>
-        <a className="hidden-md-down" href="#"><i className="fa fa-map-marker"></i> 111/C Kandy</a>
+        <a className="hidden-md-down" href={`callto:${settings.phone}`}><i className="fa fa-phone"></i>&nbsp; {settings.phone}</a>
+        <a className="hidden-md-down" href={`mailto:${settings.email}`}><i className="fa fa-envelope-o"></i>&nbsp; {settings.email}</a>
+        <a className="hidden-md-down" href="#"><i className="fa fa-map-marker"></i> {settings.address}</a>
     </div>
     <div className="topbar-column">
         {/*<div className="lang-currency-switcher-wrap">
@@ -26,9 +26,9 @@ class Top extends Component{
                 </div>
             </div>
         </div>*/}
-        <a className="social-button sb-facebook shape-none sb-dark soc-border" href="#" target="_blank"><i className="socicon-facebook"></i></a>
-        <a className="social-button sb-twitter shape-none sb-dark" href="#" target="_blank"><i className="socicon-twitter"></i></a>
-        <a className="social-button sb-instagram shape-none sb-dark" href="#" target="_blank"><i className="socicon-instagram"></i></a>
+        <a className="social-button sb-facebook shape-none sb-dark soc-border" href={settings.facebook_url} target="_blank"><i className="socicon-facebook"></i></a>
+        <a className="social-button sb-twitter shape-none sb-dark" href={settings.twitter_url} target="_blank"><i className="socicon-twitter"></i></a>
+        <a className="social-button sb-instagram shape-none sb-dark" href={settings.instagram_url} target="_blank"><i className="socicon-instagram"></i></a>
     </div>
 </div>
 

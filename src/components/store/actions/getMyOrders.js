@@ -1,5 +1,6 @@
 import * as actionTypes  from './actionTypes'
 import axios from 'axios'
+import { home } from './keys';
 
 export const getMyOrdersStart = () => {
     return {
@@ -25,7 +26,7 @@ export const getMyOrdersFail = err => {
 export const getMyOrders = token => {
     return dispatch => {
         dispatch (getMyOrdersStart())
-        axios.get('http://localhost:8000/api/user/orders/',{headers:{Authorization:"Token "+token}})
+        axios.get(`${home}/api/user/orders/`,{headers:{Authorization:"Token "+token}})
         .then(res=>{
             dispatch(getMyOrdersSuccess(res.data))
         })
